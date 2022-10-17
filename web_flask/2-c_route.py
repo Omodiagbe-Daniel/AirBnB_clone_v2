@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""starts a Flask web application"""
+"""starts and configure Flask web application"""
 
 from flask import Flask
 app = Flask(__name__)
@@ -21,7 +21,7 @@ def hbhb():
 def c(text):
     """return C + text"""
     txt = text.replace('_', " ")
-    return f"C {txt}"
+    return "C " + txt
 
 
 if __name__ == "__main__":
