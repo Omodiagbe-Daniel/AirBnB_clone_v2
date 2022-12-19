@@ -1,11 +1,21 @@
 #!/usr/bin/python3
-"""Fabric script that generates a .tgz archive"""
-from fabric.api import local
+"""
+Fabric script that generates archive
+"""
+
+from fabric.api import *
 from datetime import datetime
+import os
+
+env.hosts = ["35.196.96.41", "3.234.218.189"]
+env.user = "ubuntu"
 
 
 def do_pack():
-    """Fabric script that generates a .tgz archive"""
+    """
+        return the archive path if correctly gernerated.
+    """
+
     local("mkdir -p versions")
     date = datetime.now().strftime("%Y%m%d%H%M%S")
     archived_f_path = "versions/web_static_{}.tgz".format(date)
@@ -18,8 +28,9 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """distributes an archive to your web servers,
-    using the function do_deploy"""
+    """
+        Distribute an archive to our web servers
+    """
     if os.path.exists(archive_path):
         archived_file = archive_path[9:]
         newest_version = "/data/web_static/releases/" + archived_file[:-4]
@@ -42,9 +53,10 @@ def do_deploy(archive_path):
 
 
 def deploy():
-"""creates and distributes an archive"""
-    arch = do_pack()
-    if arch:
-        dep = do_deploy(arch)
-        return dep
+    """
+    Deploy function do_pack and do_deploy.
+    """
+    path = do_pack()
+    if path:
+        do_deploy(path)
     return False
