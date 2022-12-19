@@ -16,7 +16,8 @@ def do_pack():
     else:
         return None
 
-def deploy():
+
+def deploy(archive_path):
     """creates and distributes an archive"""
     if os.path.exists(archive_path):
         archived_file = archive_path[9:]
