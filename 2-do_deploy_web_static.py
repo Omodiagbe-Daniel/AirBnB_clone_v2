@@ -18,7 +18,8 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """creates and distributes an archive"""
+    """distributes an archive to your web servers,
+    using the function do_deploy"""
     if os.path.exists(archive_path):
         archived_file = archive_path[9:]
         newest_version = "/data/web_static/releases/" + archived_file[:-4]
